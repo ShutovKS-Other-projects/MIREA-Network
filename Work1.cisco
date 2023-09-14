@@ -1,0 +1,422 @@
+#Ваша приписка в формате первая буква имени и фамилия - {UniqueUsername}
+#Ваш уникальный ип адрес (номер в таблице) * 10 / (номер группы) - {UniqueId}
+
+#Switch1
+#Switch Start 
+enable
+configure terminal
+hostname {UniqueUsername}-Switch-1
+
+#Created VLAN 
+vlan 10
+name {UniqueUsername}-VLAN-10
+vlan 20
+name {UniqueUsername}-VLAN-20
+vlan 30
+name {UniqueUsername}-VLAN-30
+vlan 40
+name {UniqueUsername}-VLAN-40
+vlan 50
+name {UniqueUsername}-VLAN-50
+vlan 60
+name {UniqueUsername}-VLAN-60
+vlan 70
+name {UniqueUsername}-Management
+
+#Created interface
+interface e0/2
+switchport mode access
+switchport access vlan 10
+description "{UniqueUsername}-PC-12"
+interface e0/1
+switchport mode access
+switchport access vlan 10
+description "{UniqueUsername}-PC-13"
+interface e1/0
+switchport mode access
+switchport access vlan 20
+description "{UniqueUsername}-PC-34"
+interface e0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-2"
+interface e1/1
+switchport mode access
+switchport access vlan 70
+description "{UniqueUsername}-SSH-Client"
+
+interface vlan 70
+description "{UniqueUsername}-Management"
+ip address 10.{UniqueId}.70.1 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+
+#Setting VTP server
+vtp domain {UniqueUsername}-Server
+vtp password 12345
+vtp version 3
+vtp mode server
+exit
+vtp primary vlan
+
+#Save
+wr
+
+#######
+
+#Switch2
+#Switch Start 
+enable
+configure terminal
+hostname {UniqueUsername}-Switch-2
+
+#Created interface 
+interface e0/3
+switchport mode access
+switchport access vlan 10
+description "{UniqueUsername}-PC-14"
+interface e0/2
+switchport mode access
+switchport access vlan 20
+description "{UniqueUsername}-PC-35"
+interface e1/1
+switchport mode access
+switchport access vlan 30
+description "IPSec-L2TP-Client"
+interface e1/0
+switchport mode access
+switchport access vlan 30
+description "{UniqueUsername}-PC-29"
+interface e1/2
+switchport mode access
+switchport access vlan 30
+description "{UniqueUsername}-PC-30"
+interface e0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-1"
+interface e0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-3"
+
+interface vlan 70
+description "{UniqueUsername}-Management"
+ip address 10.{UniqueId}.70.2 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+
+#Setting VTP server
+vtp domain {UniqueUsername}-Server
+vtp password 12345
+vtp version 3
+vtp mode client
+exit
+
+#Save
+wr
+
+#######
+
+#Switch3
+#Switch Start 
+enable
+configure terminal
+hostname {UniqueUsername}-Switch-3
+
+#Created interface
+interface e1/0
+switchport mode access
+switchport access vlan 30
+description "{UniqueUsername}-PC-8"
+interface e0/3
+switchport mode access
+switchport access vlan 30
+description "{UniqueUsername}-PC-32"
+interface e1/1
+switchport mode access
+switchport access vlan 40
+description "{UniqueUsername}-OpenVPN-L2-Client"
+interface e1/2
+switchport mode access
+switchport access vlan 40
+description "{UniqueUsername}-PC-24"
+interface e1/3
+switchport mode access
+switchport access vlan 40
+description "{UniqueUsername}-PC-25"
+interface e0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-2"
+interface e0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-4"
+interface e0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "{UniqueUsername}-Main-Router"
+
+interface vlan 70
+description "{UniqueUsername}-Management"
+ip address 10.{UniqueId}.70.3 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+
+#Setting VTP server
+vtp domain {UniqueUsername}-Server
+vtp password 12345
+vtp version 3
+vtp mode client
+exit
+
+#Save
+wr
+
+#######
+
+#Switch4
+#Switch Start 
+enable
+configure terminal
+hostname {UniqueUsername}-Switch-4
+
+#Created interface
+interface e0/3
+switchport mode access
+switchport access vlan 50
+description "{UniqueUsername}-PC-16"
+interface e1/0
+switchport mode access
+switchport access vlan 50
+description "{UniqueUsername}-PC-17"
+interface e1/1
+switchport mode access
+switchport access vlan 60
+description "{UniqueUsername}-PC-19"
+interface e1/2
+switchport mode access
+switchport access vlan 40
+description "{UniqueUsername}-PC-26"
+interface e0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-3"
+interface e0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-5"
+
+interface vlan 70
+description "{UniqueUsername}-Management"
+ip address 10.{UniqueId}.70.4 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+
+#Setting VTP server
+vtp domain {UniqueUsername}-Server
+vtp password 12345
+vtp version 3
+vtp mode client
+exit
+
+#Save
+wr
+
+#######
+
+#Switch5
+#Switch Start 
+enable
+configure terminal
+hostname {UniqueUsername}-Switch-5
+
+#Created interface
+interface e1/1
+switchport mode access
+switchport access vlan 60
+description "{UniqueUsername}-PC-18"
+interface e0/2
+switchport mode access
+switchport access vlan 60
+description "{UniqueUsername}-PC-20"
+interface e0/3
+switchport mode access
+switchport access vlan 60
+description "{UniqueUsername}-PC-21"
+interface e1/0
+switchport mode access
+switchport access vlan 50
+description "{UniqueUsername}-OpenVPN-L3-Client"
+interface e0/1
+switchport mode access
+switchport access vlan 40
+description "{UniqueUsername}-PC-27"
+interface e0/0
+switchport trunk encapsulation dot1q
+switchport mode trunk
+description "To {UniqueUsername}-Switch-4"
+
+interface vlan 70
+description "{UniqueUsername}-Management"
+ip address 10.{UniqueId}.70.5 255.255.255.0
+no shutdown
+exit
+ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+
+
+#Setting VTP server
+vtp domain {UniqueUsername}-Server
+vtp password 12345
+vtp version 3
+vtp mode client
+exit
+
+#Save
+wr
+
+#######
+
+#Main-Router
+#no
+
+#Router Start
+en
+conf t
+hostname {UniqueUsername}-Main-Router
+no service config
+no ip domain lookup
+
+#Router interface enable 
+int e0/0
+no shutdown
+
+#created subinterface for VLAN10-60 and setting DHCP server
+int e0/0.10
+encapsulation dot1q 10
+ip address 10.{UniqueId}.10.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN10POOL
+network 10.{UniqueId}.10.0 255.255.255.0
+default-router 10.{UniqueId}.10.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.10.1 10.{UniqueId}.10.9
+ip dhcp excluded-address 10.{UniqueId}.10.101 10.{UniqueId}.10.254
+
+int e0/0.20
+encapsulation dot1q 20
+ip address 10.{UniqueId}.20.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN20POOL
+network 10.{UniqueId}.20.0 255.255.255.0
+default-router 10.{UniqueId}.20.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.20.1 10.{UniqueId}.20.9
+ip dhcp excluded-address 10.{UniqueId}.20.101 10.{UniqueId}.20.254
+
+int e0/0.30
+encapsulation dot1q 30
+ip address 10.{UniqueId}.30.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN30POOL
+network 10.{UniqueId}.30.0 255.255.255.0
+default-router 10.{UniqueId}.30.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.30.1 10.{UniqueId}.30.9
+ip dhcp excluded-address 10.{UniqueId}.30.101 10.{UniqueId}.30.254
+
+int e0/0.40
+encapsulation dot1q 40
+ip address 10.{UniqueId}.40.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN40POOL
+network 10.{UniqueId}.40.0 255.255.255.0
+default-router 10.{UniqueId}.40.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.40.1 10.{UniqueId}.40.9
+ip dhcp excluded-address 10.{UniqueId}.40.101 10.{UniqueId}.40.254
+
+int e0/0.50
+encapsulation dot1q 50
+ip address 10.{UniqueId}.50.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN50POOL
+network 10.{UniqueId}.50.0 255.255.255.0
+default-router 10.{UniqueId}.50.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.50.1 10.{UniqueId}.50.9
+ip dhcp excluded-address 10.{UniqueId}.50.101 10.{UniqueId}.50.254
+
+int e0/0.60
+encapsulation dot1q 60
+ip address 10.{UniqueId}.60.254 255.255.255.0
+ip dhcp pool {UniqueUsername}-VLAN60POOL
+network 10.{UniqueId}.60.0 255.255.255.0
+default-router 10.{UniqueId}.60.254
+dns-server 8.8.8.8 8.8.4.4
+exit
+ip dhcp excluded-address 10.{UniqueId}.60.1 10.{UniqueId}.60.9
+ip dhcp excluded-address 10.{UniqueId}.60.101 10.{UniqueId}.60.254
+
+#created subinterface for VLAN70
+int e0/0.70
+encapsulation dot1q 70
+ip address 10.{UniqueId}.70.254 255.255.255.0
+
+#save
+exit
+exit
+wr
+
+#######
+
+#SSH-Client
+#image - Linux Debian
+#wipe
+
+#login: root
+#password: eve@123
+
+nano /etc/network/interface
+
+#File #
+
+source /etc/network/interface.d/*
+
+auto lo
+iface lo inet loopback
+
+auto ens3
+iface ens3 inet static
+	address 10.{UniqueId}.70.200/24
+	gateway 10.{UniqueId}.70.254
+
+#end File #
+
+service network restart
+ip a
+ping 10.{UniqueId}.70.1
+
+#######
+
+#Check setting on PC
+ip dhcp
+show ip
+ping 10.{UniqueId}.@0.10
+
+#######
+#Tasks
+sh vlan #Task 1
+sh run #Task 2
+sh vtp status #Task 3 for Switch1 (VTP info)
+sh vlan #Task 3 for switch others (VLAN info)
+sh run #Task 4
+sh run | section dhcp #Task 5 for Router
+ip dhcp #Task 5 get ip from PC
+sh ip #Task 5 get ip from PC
+sh run #Task 6

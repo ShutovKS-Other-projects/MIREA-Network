@@ -47,10 +47,10 @@ description "{UniqueUsername}-SSH-Client"
 
 interface vlan 70
 description "{UniqueUsername}-Management"
-ip address 10.{UniqueId}.70.1 255.255.255.0
+ip address 10.{0}.70.1 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
 
 #Setting VTP server
 vtp domain {UniqueUsername}-Server
@@ -103,10 +103,10 @@ description "To {UniqueUsername}-Switch-3"
 
 interface vlan 70
 description "{UniqueUsername}-Management"
-ip address 10.{UniqueId}.70.2 255.255.255.0
+ip address 10.{0}.70.2 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
 
 #Setting VTP server
 vtp domain {UniqueUsername}-Server
@@ -162,10 +162,10 @@ description "{UniqueUsername}-Main-Router"
 
 interface vlan 70
 description "{UniqueUsername}-Management"
-ip address 10.{UniqueId}.70.3 255.255.255.0
+ip address 10.{0}.70.3 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
 
 #Setting VTP server
 vtp domain {UniqueUsername}-Server
@@ -213,10 +213,10 @@ description "To {UniqueUsername}-Switch-5"
 
 interface vlan 70
 description "{UniqueUsername}-Management"
-ip address 10.{UniqueId}.70.4 255.255.255.0
+ip address 10.{0}.70.4 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
 
 #Setting VTP server
 vtp domain {UniqueUsername}-Server
@@ -239,7 +239,7 @@ hostname {UniqueUsername}-Switch-5
 #Created interface
 interface e1/1
 switchport mode access
-switchport access vlan 60
+switchport access vlan 50
 description "{UniqueUsername}-PC-18"
 interface e0/2
 switchport mode access
@@ -264,10 +264,10 @@ description "To {UniqueUsername}-Switch-4"
 
 interface vlan 70
 description "{UniqueUsername}-Management"
-ip address 10.{UniqueId}.70.5 255.255.255.0
+ip address 10.{0}.70.5 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{UniqueId}.70.254
+ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
 
 
 #Setting VTP server
@@ -299,74 +299,74 @@ no shutdown
 #created subinterface for VLAN10-60 and setting DHCP server
 int e0/0.10
 encapsulation dot1q 10
-ip address 10.{UniqueId}.10.254 255.255.255.0
+ip address 10.{0}.10.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN10POOL
-network 10.{UniqueId}.10.0 255.255.255.0
-default-router 10.{UniqueId}.10.254
+network 10.{0}.10.0 255.255.255.0
+default-router 10.{0}.10.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.10.1 10.{UniqueId}.10.9
-ip dhcp excluded-address 10.{UniqueId}.10.101 10.{UniqueId}.10.254
+ip dhcp excluded-address 10.{0}.10.1 10.{0}.10.9
+ip dhcp excluded-address 10.{0}.10.101 10.{0}.10.254
 
 int e0/0.20
 encapsulation dot1q 20
-ip address 10.{UniqueId}.20.254 255.255.255.0
+ip address 10.{0}.20.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN20POOL
-network 10.{UniqueId}.20.0 255.255.255.0
-default-router 10.{UniqueId}.20.254
+network 10.{0}.20.0 255.255.255.0
+default-router 10.{0}.20.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.20.1 10.{UniqueId}.20.9
-ip dhcp excluded-address 10.{UniqueId}.20.101 10.{UniqueId}.20.254
+ip dhcp excluded-address 10.{0}.20.1 10.{0}.20.9
+ip dhcp excluded-address 10.{0}.20.101 10.{0}.20.254
 
 int e0/0.30
 encapsulation dot1q 30
-ip address 10.{UniqueId}.30.254 255.255.255.0
+ip address 10.{0}.30.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN30POOL
-network 10.{UniqueId}.30.0 255.255.255.0
-default-router 10.{UniqueId}.30.254
+network 10.{0}.30.0 255.255.255.0
+default-router 10.{0}.30.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.30.1 10.{UniqueId}.30.9
-ip dhcp excluded-address 10.{UniqueId}.30.101 10.{UniqueId}.30.254
+ip dhcp excluded-address 10.{0}.30.1 10.{0}.30.9
+ip dhcp excluded-address 10.{0}.30.101 10.{0}.30.254
 
 int e0/0.40
 encapsulation dot1q 40
-ip address 10.{UniqueId}.40.254 255.255.255.0
+ip address 10.{0}.40.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN40POOL
-network 10.{UniqueId}.40.0 255.255.255.0
-default-router 10.{UniqueId}.40.254
+network 10.{0}.40.0 255.255.255.0
+default-router 10.{0}.40.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.40.1 10.{UniqueId}.40.9
-ip dhcp excluded-address 10.{UniqueId}.40.101 10.{UniqueId}.40.254
+ip dhcp excluded-address 10.{0}.40.1 10.{0}.40.9
+ip dhcp excluded-address 10.{0}.40.101 10.{0}.40.254
 
 int e0/0.50
 encapsulation dot1q 50
-ip address 10.{UniqueId}.50.254 255.255.255.0
+ip address 10.{0}.50.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN50POOL
-network 10.{UniqueId}.50.0 255.255.255.0
-default-router 10.{UniqueId}.50.254
+network 10.{0}.50.0 255.255.255.0
+default-router 10.{0}.50.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.50.1 10.{UniqueId}.50.9
-ip dhcp excluded-address 10.{UniqueId}.50.101 10.{UniqueId}.50.254
+ip dhcp excluded-address 10.{0}.50.1 10.{0}.50.9
+ip dhcp excluded-address 10.{0}.50.101 10.{0}.50.254
 
 int e0/0.60
 encapsulation dot1q 60
-ip address 10.{UniqueId}.60.254 255.255.255.0
+ip address 10.{0}.60.254 255.255.255.0
 ip dhcp pool {UniqueUsername}-VLAN60POOL
-network 10.{UniqueId}.60.0 255.255.255.0
-default-router 10.{UniqueId}.60.254
+network 10.{0}.60.0 255.255.255.0
+default-router 10.{0}.60.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{UniqueId}.60.1 10.{UniqueId}.60.9
-ip dhcp excluded-address 10.{UniqueId}.60.101 10.{UniqueId}.60.254
+ip dhcp excluded-address 10.{0}.60.1 10.{0}.60.9
+ip dhcp excluded-address 10.{0}.60.101 10.{0}.60.254
 
 #created subinterface for VLAN70
 int e0/0.70
 encapsulation dot1q 70
-ip address 10.{UniqueId}.70.254 255.255.255.0
+ip address 10.{0}.70.254 255.255.255.0
 
 #save
 exit
@@ -393,21 +393,21 @@ iface lo inet loopback
 
 auto ens3
 iface ens3 inet static
-	address 10.{UniqueId}.70.200/24
-	gateway 10.{UniqueId}.70.254
+	address 10.{0}.70.200/24
+	gateway 10.{0}.70.254
 
 #end File #
 
 service network restart
 ip a
-ping 10.{UniqueId}.70.1
+ping 10.{0}.70.1
 
 #######
 
 #Check setting on PC
 ip dhcp
 show ip
-ping 10.{UniqueId}.@0.10
+ping 10.{0}.@0.10
 
 #######
 #Tasks

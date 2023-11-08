@@ -1,59 +1,56 @@
-#Ваша приписка в формате первая буква имени и фамилия - {UniqueUsername}
-#Ваш уникальный ип адрес (номер в таблице) * 10 / (номер группы) - {UniqueId}
-
 #Switch1
 #Switch Start 
 enable
 configure terminal
-hostname {UniqueUsername}-Switch-1
+hostname KShutov-Switch-1
 
 #Created VLAN 
 vlan 10
-name {UniqueUsername}-VLAN-10
+name KShutov-VLAN-10
 vlan 20
-name {UniqueUsername}-VLAN-20
+name KShutov-VLAN-20
 vlan 30
-name {UniqueUsername}-VLAN-30
+name KShutov-VLAN-30
 vlan 40
-name {UniqueUsername}-VLAN-40
+name KShutov-VLAN-40
 vlan 50
-name {UniqueUsername}-VLAN-50
+name KShutov-VLAN-50
 vlan 60
-name {UniqueUsername}-VLAN-60
+name KShutov-VLAN-60
 vlan 70
-name {UniqueUsername}-Management
+name KShutov-Management
 
 #Created interface
 interface e0/2
 switchport mode access
 switchport access vlan 10
-description "{UniqueUsername}-PC-12"
+description "KShutov-PC-12"
 interface e0/1
 switchport mode access
 switchport access vlan 10
-description "{UniqueUsername}-PC-13"
+description "KShutov-PC-13"
 interface e1/0
 switchport mode access
 switchport access vlan 20
-description "{UniqueUsername}-PC-34"
+description "KShutov-PC-34"
 interface e0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-2"
+description "To KShutov-Switch-2"
 interface e1/1
 switchport mode access
 switchport access vlan 70
-description "{UniqueUsername}-SSH-Client"
+description "KShutov-SSH-Client"
 
 interface vlan 70
-description "{UniqueUsername}-Management"
-ip address 10.{0}.70.1 255.255.255.0
+description "KShutov-Management"
+ip address 10.31.70.1 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
+ip route 0.0.0.0 0.0.0.0 10.31.70.254
 
 #Setting VTP server
-vtp domain {UniqueUsername}-Server
+vtp domain KShutov-Server
 vtp password 12345
 vtp version 3
 vtp mode server
@@ -69,17 +66,17 @@ wr
 #Switch Start 
 enable
 configure terminal
-hostname {UniqueUsername}-Switch-2
+hostname KShutov-Switch-2
 
 #Created interface 
 interface e0/3
 switchport mode access
 switchport access vlan 10
-description "{UniqueUsername}-PC-14"
+description "KShutov-PC-14"
 interface e0/2
 switchport mode access
 switchport access vlan 20
-description "{UniqueUsername}-PC-35"
+description "KShutov-PC-35"
 interface e1/1
 switchport mode access
 switchport access vlan 30
@@ -87,29 +84,29 @@ description "IPSec-L2TP-Client"
 interface e1/0
 switchport mode access
 switchport access vlan 30
-description "{UniqueUsername}-PC-29"
+description "KShutov-PC-29"
 interface e1/2
 switchport mode access
 switchport access vlan 30
-description "{UniqueUsername}-PC-30"
+description "KShutov-PC-30"
 interface e0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-1"
+description "To KShutov-Switch-1"
 interface e0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-3"
+description "To KShutov-Switch-3"
 
 interface vlan 70
-description "{UniqueUsername}-Management"
-ip address 10.{0}.70.2 255.255.255.0
+description "KShutov-Management"
+ip address 10.31.70.2 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
+ip route 0.0.0.0 0.0.0.0 10.31.70.254
 
 #Setting VTP server
-vtp domain {UniqueUsername}-Server
+vtp domain KShutov-Server
 vtp password 12345
 vtp version 3
 vtp mode client
@@ -124,51 +121,51 @@ wr
 #Switch Start 
 enable
 configure terminal
-hostname {UniqueUsername}-Switch-3
+hostname KShutov-Switch-3
 
 #Created interface
 interface e1/0
 switchport mode access
 switchport access vlan 30
-description "{UniqueUsername}-PC-8"
+description "KShutov-PC-8"
 interface e0/3
 switchport mode access
 switchport access vlan 30
-description "{UniqueUsername}-PC-32"
+description "KShutov-PC-32"
 interface e1/1
 switchport mode access
 switchport access vlan 40
-description "{UniqueUsername}-OpenVPN-L2-Client"
+description "KShutov-OpenVPN-L2-Client"
 interface e1/2
 switchport mode access
 switchport access vlan 40
-description "{UniqueUsername}-PC-24"
+description "KShutov-PC-24"
 interface e1/3
 switchport mode access
 switchport access vlan 40
-description "{UniqueUsername}-PC-25"
+description "KShutov-PC-25"
 interface e0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-2"
+description "To KShutov-Switch-2"
 interface e0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-4"
+description "To KShutov-Switch-4"
 interface e0/2
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "{UniqueUsername}-Main-Router"
+description "KShutov-Main-Router"
 
 interface vlan 70
-description "{UniqueUsername}-Management"
-ip address 10.{0}.70.3 255.255.255.0
+description "KShutov-Management"
+ip address 10.31.70.3 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
+ip route 0.0.0.0 0.0.0.0 10.31.70.254
 
 #Setting VTP server
-vtp domain {UniqueUsername}-Server
+vtp domain KShutov-Server
 vtp password 12345
 vtp version 3
 vtp mode client
@@ -183,43 +180,43 @@ wr
 #Switch Start 
 enable
 configure terminal
-hostname {UniqueUsername}-Switch-4
+hostname KShutov-Switch-4
 
 #Created interface
 interface e0/3
 switchport mode access
 switchport access vlan 50
-description "{UniqueUsername}-PC-16"
+description "KShutov-PC-16"
 interface e1/0
 switchport mode access
 switchport access vlan 50
-description "{UniqueUsername}-PC-17"
+description "KShutov-PC-17"
 interface e1/1
 switchport mode access
 switchport access vlan 60
-description "{UniqueUsername}-PC-19"
+description "KShutov-PC-19"
 interface e1/2
 switchport mode access
 switchport access vlan 40
-description "{UniqueUsername}-PC-26"
+description "KShutov-PC-26"
 interface e0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-3"
+description "To KShutov-Switch-3"
 interface e0/1
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-5"
+description "To KShutov-Switch-5"
 
 interface vlan 70
-description "{UniqueUsername}-Management"
-ip address 10.{0}.70.4 255.255.255.0
+description "KShutov-Management"
+ip address 10.31.70.4 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
+ip route 0.0.0.0 0.0.0.0 10.31.70.254
 
 #Setting VTP server
-vtp domain {UniqueUsername}-Server
+vtp domain KShutov-Server
 vtp password 12345
 vtp version 3
 vtp mode client
@@ -234,44 +231,44 @@ wr
 #Switch Start 
 enable
 configure terminal
-hostname {UniqueUsername}-Switch-5
+hostname KShutov-Switch-5
 
 #Created interface
 interface e1/1
 switchport mode access
 switchport access vlan 50
-description "{UniqueUsername}-PC-18"
+description "KShutov-PC-18"
 interface e0/2
 switchport mode access
 switchport access vlan 60
-description "{UniqueUsername}-PC-20"
+description "KShutov-PC-20"
 interface e0/3
 switchport mode access
 switchport access vlan 60
-description "{UniqueUsername}-PC-21"
+description "KShutov-PC-21"
 interface e1/0
 switchport mode access
 switchport access vlan 50
-description "{UniqueUsername}-OpenVPN-L3-Client"
+description "KShutov-OpenVPN-L3-Client"
 interface e0/1
 switchport mode access
 switchport access vlan 40
-description "{UniqueUsername}-PC-27"
+description "KShutov-PC-27"
 interface e0/0
 switchport trunk encapsulation dot1q
 switchport mode trunk
-description "To {UniqueUsername}-Switch-4"
+description "To KShutov-Switch-4"
 
 interface vlan 70
-description "{UniqueUsername}-Management"
-ip address 10.{0}.70.5 255.255.255.0
+description "KShutov-Management"
+ip address 10.31.70.5 255.255.255.0
 no shutdown
 exit
-ip route 0.0.0.0 0.0.0.0 10.{0}.70.254
+ip route 0.0.0.0 0.0.0.0 10.31.70.254
 
 
 #Setting VTP server
-vtp domain {UniqueUsername}-Server
+vtp domain KShutov-Server
 vtp password 12345
 vtp version 3
 vtp mode client
@@ -288,7 +285,7 @@ wr
 #Router Start
 en
 conf t
-hostname {UniqueUsername}-Main-Router
+hostname KShutov-Main-Router
 no service config
 no ip domain lookup
 
@@ -299,74 +296,74 @@ no shutdown
 #created subinterface for VLAN10-60 and setting DHCP server
 int e0/0.10
 encapsulation dot1q 10
-ip address 10.{0}.10.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN10POOL
-network 10.{0}.10.0 255.255.255.0
-default-router 10.{0}.10.254
+ip address 10.31.10.254 255.255.255.0
+ip dhcp pool KShutov-VLAN10POOL
+network 10.31.10.0 255.255.255.0
+default-router 10.31.10.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.10.1 10.{0}.10.9
-ip dhcp excluded-address 10.{0}.10.101 10.{0}.10.254
+ip dhcp excluded-address 10.31.10.1 10.31.10.9
+ip dhcp excluded-address 10.31.10.101 10.31.10.254
 
 int e0/0.20
 encapsulation dot1q 20
-ip address 10.{0}.20.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN20POOL
-network 10.{0}.20.0 255.255.255.0
-default-router 10.{0}.20.254
+ip address 10.31.20.254 255.255.255.0
+ip dhcp pool KShutov-VLAN20POOL
+network 10.31.20.0 255.255.255.0
+default-router 10.31.20.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.20.1 10.{0}.20.9
-ip dhcp excluded-address 10.{0}.20.101 10.{0}.20.254
+ip dhcp excluded-address 10.31.20.1 10.31.20.9
+ip dhcp excluded-address 10.31.20.101 10.31.20.254
 
 int e0/0.30
 encapsulation dot1q 30
-ip address 10.{0}.30.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN30POOL
-network 10.{0}.30.0 255.255.255.0
-default-router 10.{0}.30.254
+ip address 10.31.30.254 255.255.255.0
+ip dhcp pool KShutov-VLAN30POOL
+network 10.31.30.0 255.255.255.0
+default-router 10.31.30.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.30.1 10.{0}.30.9
-ip dhcp excluded-address 10.{0}.30.101 10.{0}.30.254
+ip dhcp excluded-address 10.31.30.1 10.31.30.9
+ip dhcp excluded-address 10.31.30.101 10.31.30.254
 
 int e0/0.40
 encapsulation dot1q 40
-ip address 10.{0}.40.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN40POOL
-network 10.{0}.40.0 255.255.255.0
-default-router 10.{0}.40.254
+ip address 10.31.40.254 255.255.255.0
+ip dhcp pool KShutov-VLAN40POOL
+network 10.31.40.0 255.255.255.0
+default-router 10.31.40.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.40.1 10.{0}.40.9
-ip dhcp excluded-address 10.{0}.40.101 10.{0}.40.254
+ip dhcp excluded-address 10.31.40.1 10.31.40.9
+ip dhcp excluded-address 10.31.40.101 10.31.40.254
 
 int e0/0.50
 encapsulation dot1q 50
-ip address 10.{0}.50.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN50POOL
-network 10.{0}.50.0 255.255.255.0
-default-router 10.{0}.50.254
+ip address 10.31.50.254 255.255.255.0
+ip dhcp pool KShutov-VLAN50POOL
+network 10.31.50.0 255.255.255.0
+default-router 10.31.50.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.50.1 10.{0}.50.9
-ip dhcp excluded-address 10.{0}.50.101 10.{0}.50.254
+ip dhcp excluded-address 10.31.50.1 10.31.50.9
+ip dhcp excluded-address 10.31.50.101 10.31.50.254
 
 int e0/0.60
 encapsulation dot1q 60
-ip address 10.{0}.60.254 255.255.255.0
-ip dhcp pool {UniqueUsername}-VLAN60POOL
-network 10.{0}.60.0 255.255.255.0
-default-router 10.{0}.60.254
+ip address 10.31.60.254 255.255.255.0
+ip dhcp pool KShutov-VLAN60POOL
+network 10.31.60.0 255.255.255.0
+default-router 10.31.60.254
 dns-server 8.8.8.8 8.8.4.4
 exit
-ip dhcp excluded-address 10.{0}.60.1 10.{0}.60.9
-ip dhcp excluded-address 10.{0}.60.101 10.{0}.60.254
+ip dhcp excluded-address 10.31.60.1 10.31.60.9
+ip dhcp excluded-address 10.31.60.101 10.31.60.254
 
 #created subinterface for VLAN70
 int e0/0.70
 encapsulation dot1q 70
-ip address 10.{0}.70.254 255.255.255.0
+ip address 10.31.70.254 255.255.255.0
 
 #save
 exit
@@ -393,21 +390,21 @@ iface lo inet loopback
 
 auto ens3
 iface ens3 inet static
-	address 10.{0}.70.200/24
-	gateway 10.{0}.70.254
+	address 10.31.70.200/24
+	gateway 10.31.70.254
 
 #end File #
 
 service network restart
 ip a
-ping 10.{0}.70.1
+ping 10.31.70.1
 
 #######
 
 #Check setting on PC
 ip dhcp
 show ip
-ping 10.{0}.@0.10
+ping 10.31.@0.10
 
 #######
 #Tasks

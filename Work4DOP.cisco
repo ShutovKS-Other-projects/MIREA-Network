@@ -1,0 +1,78 @@
+#C-iBGP-33
+en
+conf t
+
+int e0/3
+description "KShutov-M-iBGP-99"
+ip address 13.34.12.33 255.255.255.0
+no shutdown
+
+exit
+
+router bgp 400
+network 13.34.12.0 mask 255.255.255.0
+neighbor 13.34.12.99 remote-as 400
+neighbor 13.34.12.99 next-hop-self
+neighbor 13.34.12.99 route-reflector-client
+
+exit
+exit 
+wr
+
+#C-iBGP-23
+en
+conf t
+
+int e0/3
+description "KShutov-M-iBGP-99"
+ip address 13.34.11.23 255.255.255.0
+no shutdown
+
+exit
+
+router bgp 400
+network 13.34.11.0 mask 255.255.255.0
+neighbor 13.34.11.99 remote-as 400
+neighbor 13.34.11.99 next-hop-self
+neighbor 13.34.11.99 route-reflector-client
+neighbor 13.34.11.99 route-reflector-client
+
+exit
+exit 
+wr
+
+#M-iBGP-99
+/system identity
+set name=KShutov-M-iBGP-99
+
+/interface bridge
+add name=loopback0
+
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+
+/ip address
+add interface=ether1 address=13.34.11.99/24 disable=no comment=KShutov-C-iBGP-23 network=13.34.11.0
+add interface=ether2 address=13.34.12.99/24 disable=no comment=KShutov-C-iBGP-33 network=13.34.12.0
+add interface=loopback0 address=9.34.9.90/24 disabled=no network=9.34.9.90
+
+/routing bgp instance
+add as=400 name=BGP400 redistribute-connected=yes router-id=9.34.9.90
+
+/routing bgp network
+add network=13.34.11.0/24
+add network=13.34.12.0/24
+add network=9.34.9.90/32
+
+/routing bgp peer
+add name=peer1 remote-address=13.34.11.23 remote-as=400 instance=BGP400 route-reflect=yes
+add name=peer2 remote-address=13.34.12.33 remote-as=400 instance=BGP400 route-reflect=yes
+
+/ip dhcp-client
+remove number=0
+..
+..
+
+ip route set 0 scope=255
+routing filter add chain=bgp-in set-target-scope=255
+routing bgp peer set peer1 in-filter=bgp-in
